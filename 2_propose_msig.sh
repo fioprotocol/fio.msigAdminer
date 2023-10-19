@@ -38,6 +38,26 @@ fi
 
 expire_date="$(date -d "+$EXPIRATION_IN_H hour" +%Y-%m-%dT%H:%M:%S)"
 
+echo
+echo /////////////////////---------- MultiSig Proposal -----------///////////////////////////
+echo // Configuration:
+echo "//   proposer       : $proposer"
+echo "//   proposal       : $proposalName"
+echo "//   msig expiration: $expire_date"
+echo "//   actions file   : $actions_list_file"
+echo "//   approvers      : $APPROVERS"
+echo
+echo // Actions to be performed:
+while read actions; do
+    # Skip comment lines
+    case "$actions" in \#*) continue ;; esac
+
+    echo "//   action: ${actions}"
+done < $actions_list_file
+echo
+wait_on
+
+exit 0
 ## Any trx just to create TRX Body
 TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -s -d -j 2>/dev/null)
 TRX_BODY=$(echo $TRX_BODY | jq -c '.expiration=$expire | del(.actions[])' --arg expire "$expire_date")
