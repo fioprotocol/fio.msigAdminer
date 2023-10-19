@@ -14,8 +14,4 @@
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 
-
 ./clio.sh multisig review $proposer $proposalName
-
-
-

@@ -17,6 +17,3 @@ approver=$( jq -r '.approver' "0_CONFIG.json" )
 feeApprove=$( jq -r '.feeApprove' "0_CONFIG.json" )
 
 ./clio.sh multisig approve $proposer $proposalName '{"actor": "'$approver'", "permission": "active"}' $feeApprove -p $approver
-
-
-

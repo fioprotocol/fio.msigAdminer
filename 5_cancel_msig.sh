@@ -18,5 +18,3 @@ approver=$( jq -r '.approver' "0_CONFIG.json" )
 feeCancel=$( jq -r '.feeCancel' "0_CONFIG.json" )
 
 ./clio.sh push action eosio.msig cancel '{"proposer":"'$proposer'", "proposal_name":"'$proposalName'","canceler":"'$proposer'","max_fee":"'$feeCancel'"}' -p $proposer
-
-

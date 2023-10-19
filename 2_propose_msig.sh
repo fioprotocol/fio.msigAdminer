@@ -2,7 +2,7 @@
 ################################################################################
 # MSIG Console Manager
 #
-# Scrip Created by http://CryptoLions.io
+# Script Created by http://CryptoLions.io
 # For FIO Blockchain
 #
 # Check Readme for more info.
@@ -11,6 +11,12 @@
 #
 ################################################################################
 
+#set -x
+
+CURRENT_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+if [[ -e $CURRENT_DIR/utils.sh ]]; then
+  source $CURRENT_DIR/utils.sh
+fi
 
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
@@ -36,20 +42,26 @@ expire_date="$(date -d "+$EXPIRATION_IN_H hour" +%Y-%m-%dT%H:%M:%S)"
 TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -s -d -j 2>/dev/null)
 TRX_BODY=$(echo $TRX_BODY | jq -c '.expiration=$expire | del(.actions[])' --arg expire "$expire_date")
 
-echo $TRX_BODY > trx.json
+# Create tx json
+rm ${proposalName}_trx.json
+echo $TRX_BODY > ${proposalName}_trx.json
 
+# Read actions from actions file and update tx json
 while read actions; do
+    # Skip comment lines
+    case "$actions" in \#*) continue ;; esac
+
+    echo "Processing action ${actions}...."
     act_res=$(eval $actions -j -s -d  2>/dev/null)
     echo $act_res > acts.json
     tAct=$(cat acts.json | jq '.actions' | jq .)
     echo $tAct > input.json
-    R=$(jq  '.actions+=input' trx.json input.json )
-    echo $R | jq . > trx.json
+    R=$(jq  '.actions+=input' ${proposalName}_trx.json input.json )
+    echo $R | jq . > ${proposalName}_trx.json
     rm ./acts.json
     rm ./input.json
 done < $actions_list_file
 
-./clio.sh multisig propose_trx $proposalName "[$APPROVERS]" $feePropose trx.json $proposer -p $proposer
-
-#rm trx.json
-
+if yes_or_no "Execute multisig propose for proposal $proposalName"; then
+    ./clio.sh multisig propose_trx $proposalName "[$APPROVERS]" $feePropose ${proposalName}_trx.json $proposer -p $proposer
+fi

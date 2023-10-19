@@ -1,20 +1,18 @@
 {
-    "proposer": "lion4uxxfbqo",
-    "proposalName": "createfee",
-    "approver": "lion4uxxfbqo",
-    "msig_expiration_h": 168,
-    "actions_list_file": "1_actions_list",
+    "proposer": "nyvrxkxhiyql",
+    "proposalName": "upd2nzrc1b",
+    "approver": "nyvrxkxhiyql",
+    "msig_expiration_h": 1440,
+    "actions_list_file": "actions/1d_contracts_update",
     "requireBPsapprove": 1,
     "approvers_list": "{\"actor\": \"acc1\", \"permission\": \"active\"},{\"actor\": \"acc2\", \"permission\": \"active\"}",
-    
-    "clio": "/opt/FIO/bin/bin/clio",
-    "walletHost": "http://127.0.0.1:553",
-    "nodeHost": "https://fio.cryptolions.io:443",
 
-    "feePropose": 0,
+    "clio": "/home/ubuntu/fio/3.4/bin/clio",
+    "walletHost": "http://127.0.0.1:8900",
+    "nodeHost": "http://52.35.164.8:8888",
+
+    "feePropose": 400000000,
     "feeApprove": 400000000,
     "feeCancel": 1000000000,
     "feeExec": 400000000
-
 }
-
