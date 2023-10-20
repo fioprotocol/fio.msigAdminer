@@ -1,5 +1,5 @@
 # EXAMPLES
-# Note: large contracts should have their own mSig, i.e. fio.system, fio.address
+# Note: large contracts should have their own mSig, i.e. fio.system, fio.address -> separate into individual proposals
 #./clio.sh set contract eosio /opt/FIO/bin/Contracts/last/fio.system/ -p eosio
 #./clio.sh set contract fio.address /opt/FIO/bin/Contracts/last/fio.address/ -p fio.address
 #./clio.sh set contract eosio.msig /opt/FIO/bin/Contracts/last/eosio.msig/ -p eosio.msig

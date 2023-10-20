@@ -1,3 +1,2 @@
 # EXAMPLES
-#./clio.sh push action eosio addaction '{"action":"newfioacc","contract":"eosio","actor":"eosio"}' --permission eosio
 #./clio.sh push action fio.fee createfee '{"end_point": "add_pub_address", "type":1, "suf_amount": 210000000 }' -p fio.fee

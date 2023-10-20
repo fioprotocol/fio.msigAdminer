@@ -21,7 +21,7 @@ fi
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 EXPIRATION_IN_H=$( jq -r '.msig_expiration_h' "0_CONFIG.json" )
-actions_list_file=$( jq -r '.actions_list_file' "0_CONFIG.json" )
+actions_list=$( jq -r '.actions_list_file' "0_CONFIG.json" )
 requireBPsapprove=$( jq -r '.requireBPsapprove' "0_CONFIG.json" )
 approvers_list=$( jq -r '.approvers_list' "0_CONFIG.json" )
 
@@ -44,7 +44,7 @@ echo // Configuration:
 echo "//   proposer       : $proposer"
 echo "//   proposal       : $proposalName"
 echo "//   msig expiration: $expire_date"
-echo "//   actions file   : $actions_list_file"
+echo "//   actions list   : $actions_list"
 echo "//   approvers      : $APPROVERS"
 echo
 echo // Actions to be performed:
@@ -53,7 +53,7 @@ while read actions; do
     case "$actions" in \#*) continue ;; esac
 
     echo "//   action: ${actions}"
-done < $actions_list_file
+done < $actions_list
 echo
 wait_on
 
@@ -83,7 +83,7 @@ while read actions; do
     echo $R | jq . > ${proposalName}_trx.json
     rm ./acts.json
     rm ./input.json
-done < $actions_list_file
+done < $actions_list
 
 if yes_or_no "Execute multisig propose for proposal $proposalName"; then
     echo "Proposing $proposalName mSig, at `date`"

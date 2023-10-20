@@ -3,7 +3,7 @@
     "proposalName": "upd2nzrc1b",
     "approver": "nyvrxkxhiyql",
     "msig_expiration_h": 1440,
-    "actions_list_file": "1_actions_list",
+    "actions_list_file": "1_addactions",
     "requireBPsapprove": 1,
     "approvers_list": "{\"actor\": \"acc1\", \"permission\": \"active\"},{\"actor\": \"acc2\", \"permission\": \"active\"}",
 
