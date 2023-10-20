@@ -50,17 +50,13 @@ echo
 echo // Actions to be performed:
 while read actions; do
     # Skip blank, empty, comment lines
-    case "$actions" in
-      \#*|"")
-        continue ;;
-    esac
+    case "$actions" in \#*|"") continue ;; esac
 
     echo "//   action: ${actions}"
 done < $actions_list
 echo
 wait_on
 
-exit 0
 ## Any trx just to create TRX Body
 #  -d,--dont-broadcast         don't broadcast transaction to the network (just print to stdout)
 #  -j,--json                   print result as json
@@ -75,7 +71,7 @@ echo $TRX_BODY > ${proposalName}_trx.json
 # Read actions from actions file and update tx json
 while read actions; do
     # Skip comment lines
-    case "$actions" in \#*) continue ;; esac
+    case "$actions" in \#*|"") continue ;; esac
 
     echo "Processing action ${actions}...."
     act_res=$(eval $actions -d -j -s  2>/dev/null)
