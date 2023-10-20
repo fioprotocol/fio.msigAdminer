@@ -59,7 +59,10 @@ wait_on
 
 exit 0
 ## Any trx just to create TRX Body
-TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -s -d -j 2>/dev/null)
+#  -d,--dont-broadcast         don't broadcast transaction to the network (just print to stdout)
+#  -j,--json                   print result as json
+#  -s,--skip-sign              Specify if unlocked wallet keys should be used to sign transaction
+TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -d -j -s 2>/dev/null)
 TRX_BODY=$(echo $TRX_BODY | jq -c '.expiration=$expire | del(.actions[])' --arg expire "$expire_date")
 
 # Create tx json
@@ -72,7 +75,7 @@ while read actions; do
     case "$actions" in \#*) continue ;; esac
 
     echo "Processing action ${actions}...."
-    act_res=$(eval $actions -j -s -d  2>/dev/null)
+    act_res=$(eval $actions -d -j -s  2>/dev/null)
     echo $act_res > acts.json
     tAct=$(cat acts.json | jq '.actions' | jq .)
     echo $tAct > input.json
@@ -83,5 +86,6 @@ while read actions; do
 done < $actions_list_file
 
 if yes_or_no "Execute multisig propose for proposal $proposalName"; then
+    echo "Proposing $proposalName mSig, at `date`"
     ./clio.sh multisig propose_trx $proposalName "[$APPROVERS]" $feePropose ${proposalName}_trx.json $proposer -p $proposer
 fi

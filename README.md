@@ -1,4 +1,4 @@
-# MSIG console manager FIO
+# FIO mSIG Adminer
   
 Bash scripts to create/review/approve/cancel/execute msigs
   
