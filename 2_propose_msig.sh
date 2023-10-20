@@ -49,8 +49,11 @@ echo "//   approvers      : $APPROVERS"
 echo
 echo // Actions to be performed:
 while read actions; do
-    # Skip comment lines
-    case "$actions" in \#*) continue ;; esac
+    # Skip blank, empty, comment lines
+    case "$actions" in
+      \#*|"")
+        continue ;;
+    esac
 
     echo "//   action: ${actions}"
 done < $actions_list
