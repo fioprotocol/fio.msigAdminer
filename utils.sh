@@ -37,3 +37,18 @@ function wait_on {
                 fi
         done
 }
+
+joinByChar() {
+  local IFS="$1"
+  shift
+  echo "$*"
+}
+
+joinByString() {
+  local separator="$1"
+  shift
+  local first="$1"
+  shift
+  printf "%s" "$first" "${@/#/$separator}"
+}
+
