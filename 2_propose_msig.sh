@@ -77,7 +77,7 @@ TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -d -j -s 2>/d
 TRX_BODY=$(echo $TRX_BODY | jq -c '.expiration=$expire | del(.actions[])' --arg expire "$expire_date")
 
 # Create tx json
-rm ${proposalName}_trx.json
+rm -f ${proposalName}_trx.json
 echo $TRX_BODY > ${proposalName}_trx.json
 
 # Read actions from actions file and update tx json

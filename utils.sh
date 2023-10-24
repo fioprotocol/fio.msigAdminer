@@ -6,6 +6,7 @@ function unlock_wallet {
   if [[ -r walletkey.ini ]]; then
     walletkey=$(head -n 1 ./walletkey.ini)
     ./clio.sh wallet unlock -n fio --password $walletkey &> /dev/null
+  fi
 }
 
 # May be called two ways
