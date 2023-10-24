@@ -19,6 +19,11 @@ if [[ -e $CURRENT_DIR/utils.sh ]]; then
 fi
 unlock_wallet
 
+# parse config
+CLIO=$( jq -r '.clio' "0_CONFIG.json" )
+WALLETHOST=$( jq -r '.walletHost' "0_CONFIG.json" )
+NODEHOST=$( jq -r '.nodeHost' "0_CONFIG.json" )
+
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 approver=$( jq -r '.approver' "0_CONFIG.json" )
@@ -27,10 +32,13 @@ feeExec=$( jq -r '.feeExec' "0_CONFIG.json" )
 echo
 echo /////////////////////---------- MultiSig Execution -----------///////////////////////////
 echo // Configuration:
-echo "//   proposer: $proposer"
-echo "//   proposal: $proposalName"
-echo "//   approver: $approver"
-echo "//   fee     : $feeExec"
+echo "//   clio      : $CLIO"
+echo "//   wallet url: $WALLETHOST"
+echo "//   node url  : $NODEHOST"
+echo "//   proposer  : $proposer"
+echo "//   proposal  : $proposalName"
+echo "//   approver  : $approver"
+echo "//   fee       : $feeExec"
 echo
 
 if yes_or_no "Execute multisig for proposal $proposalName"; then

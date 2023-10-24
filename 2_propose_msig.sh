@@ -20,14 +20,11 @@ if [[ -e $CURRENT_DIR/utils.sh ]]; then
 fi
 unlock_wallet
 
-<<<<<<< HEAD
 # parse config
-=======
 CLIO=$( jq -r '.clio' "0_CONFIG.json" )
 WALLETHOST=$( jq -r '.walletHost' "0_CONFIG.json" )
 NODEHOST=$( jq -r '.nodeHost' "0_CONFIG.json" )
 
->>>>>>> 1c76dc3a50b9068bf23b1c23f5338fc68ef7c8a0
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 EXPIRATION_IN_H=$( jq -r '.msig_expiration_h' "0_CONFIG.json" )
@@ -54,8 +51,8 @@ echo
 echo /////////////////////---------- MultiSig Proposal -----------///////////////////////////
 echo // Configuration:
 echo "//   clio           : $CLIO"
-echo "//   wallet host    : $WALLETHOST"
-echo "//   node host      : $NODEHOST"
+echo "//   wallet url     : $WALLETHOST"
+echo "//   node url       : $NODEHOST"
 echo "//   proposer       : $proposer"
 echo "//   proposal       : $proposalName"
 echo "//   msig expiration: $expire_date"
