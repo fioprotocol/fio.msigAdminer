@@ -44,5 +44,5 @@ echo
 if yes_or_no "Approve multisig for proposal $proposalName"; then
     echo "Approving $proposalName mSig, at `date`"
     echo "  using command: ./clio.sh multisig approve $proposer $proposalName '{\"actor\": \"$approver\", \"permission\": \"active\"}' $feeApprove -p $approver"
-    ./clio.sh multisig approve $proposer $proposalName '{"actor": "$approver", "permission": "active"}' $feeApprove -p $approver
+    ./clio.sh multisig approve $proposer $proposalName '{"actor": "'$approver'", "permission": "active"}' $feeApprove -p $approver
 fi
