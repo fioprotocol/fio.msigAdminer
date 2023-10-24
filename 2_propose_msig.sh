@@ -20,7 +20,14 @@ if [[ -e $CURRENT_DIR/utils.sh ]]; then
 fi
 unlock_wallet
 
+<<<<<<< HEAD
 # parse config
+=======
+CLIO=$( jq -r '.clio' "0_CONFIG.json" )
+WALLETHOST=$( jq -r '.walletHost' "0_CONFIG.json" )
+NODEHOST=$( jq -r '.nodeHost' "0_CONFIG.json" )
+
+>>>>>>> 1c76dc3a50b9068bf23b1c23f5338fc68ef7c8a0
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 EXPIRATION_IN_H=$( jq -r '.msig_expiration_h' "0_CONFIG.json" )
@@ -34,16 +41,21 @@ feeCancel=$( jq -r '.feeCancel' "0_CONFIG.json" )
 feeExec=$( jq -r '.feeExec' "0_CONFIG.json" )
 
 if [[ $requireBPsapprove -eq 1 ]]; then
-    APPROVERS=$(./clio.sh system listproducers -j -l 30 | jq -r '.producers[] | ( "{\"actor\": \"" + .owner + "\", \"permission\": \"active\"}" )' | paste -s -d",")
+    #$APPROVERS=$(./clio.sh system listproducers -j -l 30 | jq -r '.producers[] | ( "{\"actor\": \"" + .owner + "\", \"permission\": \"active\"}" )' | paste -s -d",")
+    readarray -t producers < <(./clio.sh system listproducers -j -l 30 | jq -r '.producers[] | ( .owner )' )
+    readarray -td '' sorted < <(printf '{"actor": "%s", "permission":"active"}\0' "${producers[@]}" | sort -z)
+    APPROVERS=$(joinByChar , "${sorted[@]}")
 else
     APPROVERS=$approvers_list
 fi
 
 expire_date="$(date -d "+$EXPIRATION_IN_H hour" +%Y-%m-%dT%H:%M:%S)"
-
 echo
 echo /////////////////////---------- MultiSig Proposal -----------///////////////////////////
 echo // Configuration:
+echo "//   clio           : $CLIO"
+echo "//   wallet host    : $WALLETHOST"
+echo "//   node host      : $NODEHOST"
 echo "//   proposer       : $proposer"
 echo "//   proposal       : $proposalName"
 echo "//   msig expiration: $expire_date"

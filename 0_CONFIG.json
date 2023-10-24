@@ -1,7 +1,7 @@
 {
-    "proposer": "nyvrxkxhiyql",
-    "proposalName": "upd2nzrc1b",
-    "approver": "nyvrxkxhiyql",
+    "proposer": "hfdg2qumuvlc",
+    "proposalName": "msigtest1a",
+    "approver": "hfdg2qumuvlc",
     "msig_expiration_h": 1440,
     "actions_list_file": "1_addactions",
     "requireBPsapprove": 1,
@@ -11,7 +11,7 @@
     "walletHost": "unix:///home/ubuntu/fio-wallet/fio-wallet.sock",
     "nodeHost": "http://127.0.0.1:8889",
 
-    "feePropose": 400000000,
+    "feePropose": 0,
     "feeApprove": 400000000,
     "feeCancel": 1000000000,
     "feeExec": 400000000
