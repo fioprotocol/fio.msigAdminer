@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# Unlock wallet using local walletkey file
+# Recommend creating soft link to running wallet key, ln -s <target file>
+function unlock_wallet {
+  if [[ -r walletkey.ini ]]; then
+    walletkey=$(head -n 1 ./walletkey.ini)
+    ./clio.sh wallet unlock -n fio --password $walletkey &> /dev/null
+}
+
 # May be called two ways
 # if yes_or_no "echo if"; then echo "if"; else echo "else"; fi
 # if [[ $(yes_or_no "if test") -eq 0 ]]; then echo "if"; else echo "else"; fi
