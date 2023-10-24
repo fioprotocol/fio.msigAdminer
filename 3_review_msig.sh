@@ -10,8 +10,24 @@
 # https://github.com/CryptoLions/MSIG_console_manager/tree/FIO
 #
 ################################################################################
+#set -x
+
+# source utils
+CURRENT_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+if [[ -e $CURRENT_DIR/utils.sh ]]; then
+  source $CURRENT_DIR/utils.sh
+fi
+unlock_wallet
 
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 
-./clio.sh multisig review $proposer $proposalName
+echo
+echo /////////////////////---------- MultiSig Review -----------///////////////////////////
+echo // Configuration:
+echo "//   proposer: $proposer"
+echo "//   proposal: $proposalName"
+echo
+
+rm -f ${proposalName}_review.json
+./clio.sh multisig review $proposer $proposalName | tee -a ${proposalName}_review.json

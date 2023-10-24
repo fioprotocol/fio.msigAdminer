@@ -13,11 +13,14 @@
 
 #set -x
 
+# source utils
 CURRENT_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 if [[ -e $CURRENT_DIR/utils.sh ]]; then
   source $CURRENT_DIR/utils.sh
 fi
+unlock_wallet
 
+# parse config
 proposer=$( jq -r '.proposer' "0_CONFIG.json" )
 proposalName=$( jq -r '.proposalName' "0_CONFIG.json" )
 EXPIRATION_IN_H=$( jq -r '.msig_expiration_h' "0_CONFIG.json" )
@@ -84,7 +87,8 @@ while read actions; do
     rm ./input.json
 done < $actions_list
 
-if yes_or_no "Execute multisig propose for proposal $proposalName"; then
+if yes_or_no "Create multisig for $proposalName"; then
     echo "Proposing $proposalName mSig, at `date`"
+    echo "  using command: ./clio.sh multisig propose_trx $proposalName \"[$APPROVERS]\" $feePropose ${proposalName}_trx.json $proposer -p $proposer"
     ./clio.sh multisig propose_trx $proposalName "[$APPROVERS]" $feePropose ${proposalName}_trx.json $proposer -p $proposer
 fi
