@@ -41,7 +41,7 @@ else
   APPROVERS=( $approver )
 fi
 # Reset approver
-approver=
+unset approver
 
 echo
 echo /////////////////////---------- MultiSig Approval -----------///////////////////////////
@@ -51,7 +51,7 @@ echo "//   wallet url : $WALLETHOST"
 echo "//   node url   : $NODEHOST"
 echo "//   proposer   : $proposer"
 echo "//   proposal   : $proposalName"
-echo "//   autoApprove: $autoApprove
+echo "//   autoApprove: $autoApprove"
 echo "//   approvers  : ${APPROVERS[*]}"
 echo "//   fee        : $feeApprove"
 echo
