@@ -37,5 +37,4 @@ echo "//   proposer  : $proposer"
 echo "//   proposal  : $proposalName"
 echo
 
-rm -f ${proposalName}_review.json
 ./clio.sh multisig review $proposer $proposalName

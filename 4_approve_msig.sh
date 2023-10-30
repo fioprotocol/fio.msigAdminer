@@ -56,12 +56,16 @@ echo "//   approvers  : ${APPROVERS[*]}"
 echo "//   fee        : $feeApprove"
 echo
 
-if yes_or_no "Approve multisig for proposal $proposalName"; then
+if yes_or_no "Approve proposal '${proposalName}'"; then
   for approver in ${APPROVERS[@]}; do
-    if yes_or_no "Sign multisig as ${approver}"; then
-      echo "Approving $proposalName mSig, at `date`"
+    if yes_or_no "Sign as ${approver}"; then
+      echo "Approving ${proposalName} at `date`"
       echo "  using command: ./clio.sh multisig approve $proposer $proposalName '{\"actor\": \"$approver\", \"permission\": \"active\"}' $feeApprove -p $approver"
       ./clio.sh multisig approve $proposer $proposalName '{"actor": "'$approver'", "permission": "active"}' $feeApprove -p $approver
+      echo
+      echo -n "Total Nbr of Approvals: "
+      ./clio.sh get table eosio.msig $proposer approvals2 -L $proposalName -l 1 | jq '.rows[0].provided_approvals | length'
+      echo
     fi
   done
 fi

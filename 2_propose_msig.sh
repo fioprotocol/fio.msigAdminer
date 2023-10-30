@@ -37,6 +37,13 @@ feeApprove=$( jq -r '.feeApprove' "0_CONFIG.json" )
 feeCancel=$( jq -r '.feeCancel' "0_CONFIG.json" )
 feeExec=$( jq -r '.feeExec' "0_CONFIG.json" )
 
+if [[ ! -r "${actions_list}" ]]; then
+  echo
+  echo "  ERROR! Actions file, '${actions_list}', was NOT found! Exiting..."
+  echo
+  exit 1
+fi
+
 if [[ $requireBPsapprove -eq 1 ]]; then
     #$APPROVERS=$(./clio.sh system listproducers -j -l 30 | jq -r '.producers[] | ( "{\"actor\": \"" + .owner + "\", \"permission\": \"active\"}" )' | paste -s -d",")
     readarray -t producers < <(./clio.sh system listproducers -j -l 30 | jq -r '.producers[] | ( .owner )' )
@@ -96,6 +103,7 @@ while read actions; do
     rm ./input.json
 done < $actions_list
 
+echo
 if yes_or_no "Create multisig for $proposalName"; then
     echo "Proposing $proposalName mSig, at `date`"
     echo "  using command: ./clio.sh multisig propose_trx $proposalName \"[$APPROVERS]\" $feePropose ${proposalName}_trx.json $proposer -p $proposer"
