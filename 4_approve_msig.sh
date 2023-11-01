@@ -56,16 +56,21 @@ echo "//   approvers  : ${APPROVERS[*]}"
 echo "//   fee        : $feeApprove"
 echo
 
-if yes_or_no "Approve proposal '${proposalName}'"; then
-  for approver in ${APPROVERS[@]}; do
-    if yes_or_no "Sign as ${approver}"; then
-      echo "Approving ${proposalName} at `date`"
-      echo "  using command: ./clio.sh multisig approve $proposer $proposalName '{\"actor\": \"$approver\", \"permission\": \"active\"}' $feeApprove -p $approver"
-      ./clio.sh multisig approve $proposer $proposalName '{"actor": "'$approver'", "permission": "active"}' $feeApprove -p $approver
-      echo
-      echo -n "Total Nbr of Approvals: "
-      ./clio.sh get table eosio.msig $proposer approvals2 -L $proposalName -l 1 | jq '.rows[0].provided_approvals | length'
-      echo
-    fi
-  done
-fi
+echo -n "Approve proposal '${proposalName}'? "
+wait_on
+INDEX=1
+for approver in ${APPROVERS[@]}; do
+  if yes_or_no "Sign as ${approver}"; then
+    echo "Approving ${proposalName} at `date`"
+    echo "  using command: ./clio.sh multisig approve $proposer $proposalName '{\"actor\": \"$approver\", \"permission\": \"active\"}' $feeApprove -p $approver"
+    ./clio.sh multisig approve $proposer $proposalName '{"actor": "'$approver'", "permission": "active"}' $feeApprove -p $approver
+    echo
+    echo -n "Total Nbr of Approvals: "
+    ./clio.sh get table eosio.msig $proposer approvals2 -L $proposalName -l 1 | jq '.rows[0].provided_approvals | length'
+  fi
+  echo
+  echo -n "Nbr BPs left to sign: "
+  echo $((15 - ${INDEX}))
+  let INDEX=${INDEX}+1
+  echo
+done
