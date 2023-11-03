@@ -37,6 +37,13 @@ feeApprove=$( jq -r '.feeApprove' "0_CONFIG.json" )
 feeCancel=$( jq -r '.feeCancel' "0_CONFIG.json" )
 feeExec=$( jq -r '.feeExec' "0_CONFIG.json" )
 
+if [[ ${#VAR} > 12 ]]; then
+  echo "  ERROR! The proposal name has a max char length of 12."
+  echo "  Format: Name should be less than 13 characters and only contains the following symbol .12345abcdefghijklmnopqrstuvwxyz"
+  echo
+  exit 1
+fi
+
 if [[ ! -r "${actions_list}" ]]; then
   echo
   echo "  ERROR! Actions file, '${actions_list}', was NOT found! Exiting..."
@@ -76,7 +83,10 @@ done < $actions_list
 echo
 wait_on
 
-## Any trx just to create TRX Body
+# Clean up any artifacts
+rm -f ${proposalName}_trx.json
+
+# Create TRX body using Any trx
 #  -d,--dont-broadcast         don't broadcast transaction to the network (just print to stdout)
 #  -j,--json                   print result as json
 #  -s,--skip-sign              Specify if unlocked wallet keys should be used to sign transaction
@@ -84,7 +94,6 @@ TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -d -j -s 2>/d
 TRX_BODY=$(echo $TRX_BODY | jq -c '.expiration=$expire | del(.actions[])' --arg expire "$expire_date")
 
 # Create tx json
-rm -f ${proposalName}_trx.json
 echo $TRX_BODY > ${proposalName}_trx.json
 
 # Read actions from actions file and update tx json
