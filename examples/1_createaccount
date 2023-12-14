@@ -1,0 +1,5 @@
+# Local *Nets only
+# Must set System contract first (setpriv will fail otherwise)
+#./clio -u http://localhost:8889 set contract -j eosio /opt/FIO/bin/Contracts/last/fio.system fio.system.wasm fio.system.abi -p eosio@active
+# Create account
+#./clio -u http://localhost:8889 create account eosio fio.perms eosio@active FIO7isxEua78KPVbGzKemH4nj2bWE52gqj8Hkac3tc7jKNvpfWzYS -p eosio@active

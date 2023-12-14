@@ -1,0 +1,29 @@
+# TestNet only (remove key for MainNet)
+#./clio -u http://localhost:8889 push action -j -s -d eosio newaccount payload.json -p eosio@active <payload.json>
+# Payload (payload.json)
+#{
+#   "creator": "eosio",
+#   "name": "fio.perms",
+#   "owner": {
+#      "threshold": 1,
+#      "keys": [],
+#      "accounts": [{
+#         "permission": {"actor": "eosio", "permission": "active"},
+#         "weight": 1
+#      }],
+#      "waits": []
+#   },
+#   "active": {
+#      "threshold": 1,
+#      "keys": [{"key":"FIO7isxEua78KPVbGzKemH4nj2bWE52gqj8Hkac3tc7jKNvpfWzYS", "weight":1}],
+#      "accounts": [{
+#         "permission": {"actor": "eosio", "permission": "active"},
+#         "weight": 1
+#      },
+#      {
+#         "permission": {"actor": "fio.perms", "permission": "eosio.code"},
+#         "weight": 1
+#      }],
+#      "waits": []
+#   }
+#}
