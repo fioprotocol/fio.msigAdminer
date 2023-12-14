@@ -1,0 +1,19 @@
+{
+    "proposer": "cjk2eoa5a4bg",
+    "proposalName": "3.5actions",
+    "approver": "nyvrxkxhiyql",
+    "msig_expiration_h": 1440,
+    "actions_list_file": "1_addactions",
+    "requireBPsapprove": 1,
+    "approvers_list": "{\"actor\": \"acc1\", \"permission\": \"active\"},{\"actor\": \"acc2\", \"permission\": \"active\"}",
+    "autoApprove": 0,
+
+    "clio": "./clio",
+    "walletHost": "unix:///home/ubuntu/fio-wallet/fio-wallet.sock",
+    "nodeHost": "https://fio.eosusa.io",
+
+    "feePropose": 0,
+    "feeApprove": 400000000,
+    "feeCancel": 1000000000,
+    "feeExec": 400000000
+}

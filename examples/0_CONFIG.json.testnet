@@ -1,0 +1,19 @@
+{
+    "proposer": "nyvrxkxhiyql",
+    "proposalName": "testmsig1",
+    "approver": "nyvrxkxhiyql",
+    "msig_expiration_h": 1440,
+    "actions_list_file": "1_testaction",
+    "requireBPsapprove": 1,
+    "approvers_list": "{\"actor\": \"acc1\", \"permission\": \"active\"},{\"actor\": \"acc2\", \"permission\": \"active\"}",
+    "autoApprove": 0,
+
+    "clio": "./clio",
+    "walletHost": "unix:///home/ubuntu/fio-wallet/fio-wallet.sock",
+    "nodeHost": "http://52.35.164.8:8888",
+
+    "feePropose": 0,
+    "feeApprove": 400000000,
+    "feeCancel": 1000000000,
+    "feeExec": 400000000
+}
