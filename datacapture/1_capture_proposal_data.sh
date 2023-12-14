@@ -46,4 +46,3 @@ echo done
 
 echo
 echo "To verify approval count, run the command 6_count_approves.sh"
-
