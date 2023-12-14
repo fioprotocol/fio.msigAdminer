@@ -1,0 +1,2 @@
+# EXAMPLE
+#./clio.sh push action eosio addaction '{"action":"newfioacc","contract":"eosio","actor":"eosio"}' --permission eosio
