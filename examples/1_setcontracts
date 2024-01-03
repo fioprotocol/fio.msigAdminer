@@ -1,14 +1,16 @@
 # EXAMPLES
 # Note: large contracts should have their own mSig, i.e. fio.system, fio.address -> separate into individual proposals
 #./clio.sh set contract eosio /opt/FIO/bin/Contracts/last/fio.system/ -p eosio
+#./clio.sh set contract fio.perms /opt/FIO/bin/Contracts/last/fio.perms/ -p fio.perms
 #./clio.sh set contract fio.address /opt/FIO/bin/Contracts/last/fio.address/ -p fio.address
+#./clio.sh set contract fio.reqobt /opt/FIO/bin/Contracts/last/fio.request.obt/ -p fio.reqobt
+#./clio.sh set contract fio.tpid /opt/FIO/bin/Contracts/last/fio.tpid/ -p fio.tpid
+#./clio.sh set contract fio.treasury /opt/FIO/bin/Contracts/last/fio.treasury/ -p fio.treasury
+#./clio.sh set contract fio.escrow /opt/FIO/bin/Contracts/last/fio.escrow/ -p fio.escrow
+#./clio.sh set contract fio.fee /opt/FIO/bin/Contracts/last/fio.fee/ -p fio.fee
+#./clio.sh set contract fio.oracle /opt/FIO/bin/Contracts/last/fio.oracle/ -p fio.oracle
+#./clio.sh set contract fio.staking /opt/FIO/bin/Contracts/last/fio.staking/ -p fio.staking
+#./clio.sh set contract fio.token /opt/FIO/bin/Contracts/last/fio.token/ -p fio.token
+#./clio.sh set contract eosio.bios /opt/FIO/bin/Contracts/last/eosio.bios/ -p eosio.bios
 #./clio.sh set contract eosio.msig /opt/FIO/bin/Contracts/last/eosio.msig/ -p eosio.msig
 #./clio.sh set contract eosio.wrap /opt/FIO/bin/Contracts/last/eosio.wrap/ -p eosio.wrap
-#./clio.sh set contract fio.fee /opt/FIO/bin/Contracts/last/fio.fee/ -p fio.fee
-#./clio.sh set contract fio.tpid /opt/FIO/bin/Contracts/last/fio.oracle/ -p fio.oracle
-#./clio.sh set contract fio.tpid /opt/FIO/bin/Contracts/last/fio.tpid/ -p fio.tpid
-#./clio.sh set contract fio.fee /opt/FIO/bin/Contracts/last/fio.perms/ -p fio.perms
-#./clio.sh set contract fio.fee /opt/FIO/bin/Contracts/last/fio.staking/ -p fio.staking
-#./clio.sh set contract fio.reqobt /opt/FIO/bin/Contracts/last/fio.request.obt/ -p fio.reqobt
-#./clio.sh set contract fio.treasury /opt/FIO/bin/Contracts/last/fio.treasury/ -p fio.treasury
-#./clio.sh set contract fio.fee /opt/FIO/bin/Contracts/last/fio.token/ -p fio.token
