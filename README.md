@@ -1,8 +1,6 @@
 # FIO mSIG Adminer
   
-Bash scripts to create/review/approve/cancel/execute msigs
-  
-This repo is for FIO.  For other EOSIO chains, please switch to [master](https://github.com/CryptoLions/MSIG_console_manager/tree/master) branch.
+Bash scripts to create/review/approve/cancel/execute msigs on the FIO blockchain, including DevNet, TestNet and MainNet.
 
 _Note:_ if there is a backslash `\` in the data of a command, you may have to use a double backslash `\\` for the script to work.
 
@@ -27,4 +25,4 @@ Prepare actions list which will be included in msig (in example file 1_actions_l
 # 3. Execute scipts  
 Run scripts 2-7 depend on need
 
-Created by CryptoLions.io
+These scripts were originally created by CryptoLions.io but have been adapted and refactored extensively for use on the FIO blockchain. The CryptoLions repo may be found at https://github.com/CryptoLions/MSIG_console_manager.
