@@ -3,7 +3,7 @@
     "proposalName": "msigtest1a",
     "approver": "hfdg2qumuvlc",
     "msig_expiration_h": 1440,
-    "actions_list_file": "actions/1_addactions",
+    "actions_list_file": "1_addactions",
     "requireBPsapprove": 1,
     "approvers_list": "{\"actor\": \"acc1\", \"permission\": \"active\"},{\"actor\": \"acc2\", \"permission\": \"active\"}",
     "autoApprove": 0,

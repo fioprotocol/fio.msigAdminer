@@ -37,9 +37,19 @@ feeApprove=$( jq -r '.feeApprove' "0_CONFIG.json" )
 feeCancel=$( jq -r '.feeCancel' "0_CONFIG.json" )
 feeExec=$( jq -r '.feeExec' "0_CONFIG.json" )
 
-if [[ ${#VAR} > 12 ]]; then
+echo
+
+# Proposal name validation
+# Name should be less than 13 characters and only contains the following symbol .12345abcdefghijklmnopqrstuvwxyz
+if [[ ${#proposalName} > 12 ]]; then
   echo "  ERROR! The proposal name has a max char length of 12."
-  echo "  Format: Name should be less than 13 characters and only contains the following symbol .12345abcdefghijklmnopqrstuvwxyz"
+  echo "  Format: Name should be less than 13 characters and only contains the following symbols .12345abcdefghijklmnopqrstuvwxyz"
+  echo
+  exit 1
+fi
+if [[ ! (${proposalName} =~ ^[.12345abcdefghijklmnopqrstuvwxyz]+$) ]]; then
+  echo "  ERROR! The proposal name has invalid characters."
+  echo "  Format: Name should be less than 13 characters and only contains the following symbols .12345abcdefghijklmnopqrstuvwxyz"
   echo
   exit 1
 fi
@@ -61,7 +71,6 @@ else
 fi
 
 expire_date="$(date -d "+$EXPIRATION_IN_H hour" +%Y-%m-%dT%H:%M:%S)"
-echo
 echo /////////////////////---------- MultiSig Proposal -----------///////////////////////////
 echo // Configuration:
 echo "//   clio           : $CLIO"
