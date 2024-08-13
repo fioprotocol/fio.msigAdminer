@@ -1,0 +1,3 @@
+# EXAMPLES
+# Note: large contracts should have their own mSig, i.e. fio.system, fio.address -> separate into individual proposals
+./clio.sh set contract fio.tpid /opt/FIO/bin/Contracts/last/fio.tpid/ -p fio.tpid

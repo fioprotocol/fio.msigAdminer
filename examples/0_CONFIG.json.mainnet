@@ -12,8 +12,8 @@
     "walletHost": "unix:///home/ubuntu/fio-wallet/fio-wallet.sock",
     "nodeHost": "https://fio.eosusa.io",
 
-    "feePropose": 850000000000,
+    "feePropose": 1000000000000,
     "feeApprove": 400000000,
     "feeCancel": 1000000000,
-    "feeExec": 800000000
+    "feeExec": 1000000000
 }

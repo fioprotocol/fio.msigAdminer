@@ -1,2 +1,6 @@
 # EXAMPLE
 #./clio.sh push action eosio addaction '{"action":"newfioacc","contract":"eosio","actor":"eosio"}' --permission eosio
+# As actions are quite small, multiple addactions may be included in one msig
+./clio.sh push action eosio addaction '{"action":"ovrwrtgenlck","contract":"eosio","actor":"eosio"}' -p eosio
+
+./clio.sh push action eosio addaction '{"action":"auditvote","contract":"eosio","actor":"eosio"}' -p eosio

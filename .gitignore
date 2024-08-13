@@ -1,5 +1,17 @@
 clio
 walletkey.ini
-*.json
+
+*.out
+*approvals2.json
+*proposal.json
+*review.json
+*trx.json
+
+actions/1*
+actions/2*
+actions/3*
+actions/4*
 
 review
+
+scripts/msig_config.json

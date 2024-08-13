@@ -1,0 +1,29 @@
+# MainNet only
+#./clio -u http://localhost:8889 push action -j -s -d eosio newaccount payload.json -p eosio@active <payload.json>
+# Payload (payload.json)
+#{
+#   "creator": "eosio",
+#   "name": "fio.perms",
+#   "owner": {
+#      "threshold": 1,
+#      "keys": [],
+#      "accounts": [{
+#         "permission": {"actor": "eosio", "permission": "active"},
+#         "weight": 1
+#      }],
+#      "waits": []
+#   },
+#   "active": {
+#      "threshold": 1,
+#      "keys": [],
+#      "accounts": [{
+#         "permission": {"actor": "eosio", "permission": "active"},
+#         "weight": 1
+#      },
+#      {
+#         "permission": {"actor": "fio.perms", "permission": "eosio.code"},
+#         "weight": 1
+#      }],
+#      "waits": []
+#   }
+#}

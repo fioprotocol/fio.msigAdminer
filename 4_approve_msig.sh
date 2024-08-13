@@ -1,13 +1,11 @@
 #!/bin/bash
 ################################################################################
-# MSIG Console Manager
+# fio-msigAdminer
 #
-# Scrip Created by http://CryptoLions.io
-# For FIO Blockchain
+# Script originally created by http://CryptoLions.io for the FIO Blockchain
+#   https://github.com/CryptoLions/MSIG_console_manager/tree/FIO
 #
-# Check Readme for more info.
-#
-# https://github.com/CryptoLions/MSIG_console_manager/tree/FIO
+# Check Readme for more info; https://github.com/dapixio/fio-msigAdminer
 #
 ################################################################################
 #set -x

@@ -1,0 +1,7 @@
+{
+    "proposer": "fio1uipge5sr",
+    "proposalNames": "r211addactns r211setsys r211setperms r211setaddr r211setora r211setstkng r211settokn r211exeactns",
+
+    "clio": "../clio",
+    "nodeHost": "https://fio.eosusa.io"
+}

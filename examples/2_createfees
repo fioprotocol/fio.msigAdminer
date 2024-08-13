@@ -1,0 +1,4 @@
+# EXAMPLES
+#./clio.sh push action fio.fee createfee '{"end_point":"add_pub_address","type":1,"suf_amount":210000000}' -p fio.fee
+# As fees are quite small multiple createfees may be included in one msig
+./clio.sh push action fio.fee createfee '{"end_point":"audit_vote","type":0,"suf_amount":5400000000}' -p fio.fee

@@ -1,11 +1,13 @@
 #!/bin/bash
 ################################################################################
-# fio-msigAdminer
+# MSIG Console Manager
 #
-# Script originally created by http://CryptoLions.io for the FIO Blockchain
-#   https://github.com/CryptoLions/MSIG_console_manager/tree/FIO
+# Script Created by http://CryptoLions.io
+# For FIO Blockchain
 #
-# Check Readme for more info; https://github.com/dapixio/fio-msigAdminer
+# Check Readme for more info.
+#
+# https://github.com/CryptoLions/MSIG_console_manager/tree/FIO
 #
 ################################################################################
 
@@ -90,38 +92,10 @@ done < $actions_list
 echo
 wait_on
 
-# Clean up any artifacts
-rm -f ${proposalName}_trx.json
-
-# Create TRX body using Any trx
-#  -d,--dont-broadcast         don't broadcast transaction to the network (just print to stdout)
-#  -j,--json                   print result as json
-#  -s,--skip-sign              Specify if unlocked wallet keys should be used to sign transaction
-TRX_BODY=$(./clio.sh push action eosio init '[1,"4,EOS"]' -p eosio -d -j -s 2>/dev/null)
-TRX_BODY=$(echo $TRX_BODY | jq -c '.expiration=$expire | del(.actions[])' --arg expire "$expire_date")
-
-# Create tx json
-echo $TRX_BODY > ${proposalName}_trx.json
-
-# Read actions from actions file and update tx json
-while read actions; do
-    # Skip comment lines
-    case "$actions" in \#*|"") continue ;; esac
-
-    echo "Processing action ${actions}...."
-    act_res=$(eval $actions -d -j -s  2>/dev/null)
-    echo $act_res > acts.json
-    tAct=$(cat acts.json | jq '.actions' | jq .)
-    echo $tAct > input.json
-    R=$(jq  '.actions+=input' ${proposalName}_trx.json input.json )
-    echo $R | jq . > ${proposalName}_trx.json
-    rm ./acts.json
-    rm ./input.json
-done < $actions_list
-
 echo
 if yes_or_no "Create multisig for $proposalName"; then
     echo "Proposing $proposalName mSig, at `date`"
     echo "  using command: ./clio.sh multisig propose_trx $proposalName \"[$APPROVERS]\" $feePropose ${proposalName}_trx.json $proposer -p $proposer"
     ./clio.sh multisig propose_trx $proposalName "[$APPROVERS]" $feePropose ${proposalName}_trx.json $proposer -p $proposer
 fi
+

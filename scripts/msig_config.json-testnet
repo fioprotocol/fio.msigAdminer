@@ -1,0 +1,7 @@
+{
+    "proposer": "nyvrxkxhiyql",
+    "proposalNames": "r211addactns r211setsys r211setperms r211setaddr r211setora r211setstkng r211settokn r211exeactns",
+
+    "clio": "../clio",
+    "nodeHost": "http://52.35.164.8:8888"
+}

@@ -1,0 +1,3 @@
+# EXAMPLE
+#./clio.sh push action <contract> <action> '{}' --permission eosio@active
+./clio.sh push action fio.token fipxlviii '{}' --permission eosio@active
