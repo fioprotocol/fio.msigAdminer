@@ -54,21 +54,44 @@ echo "//   approvers  : ${APPROVERS[*]}"
 echo "//   fee        : $feeApprove"
 echo
 
+# Need nbr of current sigs as well as who has approved
+NBR_SIGS=$(./clio.sh get table eosio.msig $proposer approvals2 -L $proposalName -l 1 | jq '.rows[0].provided_approvals | length')
+signers=$(./clio.sh get table eosio.msig $proposer approvals2 -L $proposalName -l 1 | jq '.rows[0].provided_approvals[] | (.level.actor)')
+echo "Current Nbr BP signatures: ${NBR_SIGS}"
+echo
+
 echo -n "Approve proposal '${proposalName}'? "
 wait_on
-INDEX=1
+INDEX=NBR_SIGS
 for approver in ${APPROVERS[@]}; do
+  # TODO: Check approves for this approver and skip if found
+  if [[ "${signers}" == *"${approver}"* ]]; then
+    continue
+  fi
+ 
   if yes_or_no "Sign as ${approver}"; then
     echo "Approving ${proposalName} at `date`"
     echo "  using command: ./clio.sh multisig approve $proposer $proposalName '{\"actor\": \"$approver\", \"permission\": \"active\"}' $feeApprove -p $approver"
     ./clio.sh multisig approve $proposer $proposalName '{"actor": "'$approver'", "permission": "active"}' $feeApprove -p $approver
+    sleep 1
     echo
     echo -n "Total Nbr of Approvals: "
     ./clio.sh get table eosio.msig $proposer approvals2 -L $proposalName -l 1 | jq '.rows[0].provided_approvals | length'
+    let INDEX=${INDEX}+1
   fi
   echo
-  echo -n "Nbr BPs left to sign: "
-  echo $((15 - ${INDEX}))
-  let INDEX=${INDEX}+1
+  echo -n "Nbr BPs not signed: "
+  if [[ ${INDEX} -lt 21 ]]; then
+    echo $((21 - ${INDEX}))
+  else
+    echo 0
+  fi
+  echo -n "Nbr BP signatures needed: "
+  if [[ ${INDEX} -lt 15 ]]; then
+    echo $((15 - ${INDEX}))
+  else
+    echo 0
+  fi
+
   echo
 done
